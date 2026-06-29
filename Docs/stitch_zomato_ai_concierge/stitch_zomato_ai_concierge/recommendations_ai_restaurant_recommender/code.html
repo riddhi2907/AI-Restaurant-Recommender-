@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Restaurant Recommender | Bangalore Results</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#fffbff",
+                    "surface-variant": "#e5e2e1",
+                    "primary": "#b7122a",
+                    "inverse-primary": "#ffb3b1",
+                    "surface-container-highest": "#e5e2e1",
+                    "primary-container": "#db313f",
+                    "on-background": "#1b1b1b",
+                    "tertiary-fixed-dim": "#ffbb0c",
+                    "on-surface-variant": "#5b403f",
+                    "surface-dim": "#dcd9d9",
+                    "secondary-fixed": "#8dfa96",
+                    "surface-bright": "#fcf9f8",
+                    "secondary-container": "#8af793",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-low": "#f6f3f2",
+                    "outline": "#8f6f6e",
+                    "surface-tint": "#bb162c",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed-variant": "#00531b",
+                    "primary-fixed-dim": "#ffb3b1",
+                    "on-error": "#ffffff",
+                    "background": "#fcf9f8",
+                    "error": "#ba1a1a",
+                    "surface-container": "#f0eded",
+                    "on-tertiary-fixed-variant": "#5d4200",
+                    "secondary": "#006e26",
+                    "on-primary-fixed": "#410007",
+                    "inverse-surface": "#313030",
+                    "tertiary-container": "#976d00",
+                    "on-secondary-container": "#007328",
+                    "on-primary-fixed-variant": "#92001c",
+                    "inverse-on-surface": "#f3f0ef",
+                    "on-secondary-fixed": "#002106",
+                    "secondary-fixed-dim": "#71dd7c",
+                    "on-tertiary-fixed": "#271900",
+                    "on-surface": "#1b1b1b",
+                    "outline-variant": "#e4bebc",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#785600",
+                    "tertiary-fixed": "#ffdea6",
+                    "surface": "#fcf9f8",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-container": "#fffbff",
+                    "surface-container-high": "#eae7e7",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#ffdad8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "margin-mobile": "16px",
+                    "lg": "24px",
+                    "gutter": "16px",
+                    "xl": "32px",
+                    "base": "4px",
+                    "sm": "12px",
+                    "margin-desktop": "48px",
+                    "xs": "8px"
+            },
+            "fontFamily": {
+                    "section-title": ["Inter"],
+                    "page-title-mobile": ["Inter"],
+                    "card-title": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "page-title": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "section-title": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "page-title-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "card-title": ["18px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "1.5", "fontWeight": "500"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                    "page-title": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .animate-sparkle {
+            animation: sparkle 2s ease-in-out infinite;
+        }
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+        }
+        .rank-glow {
+            box-shadow: 0 0 20px rgba(183, 18, 42, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-md lg:px-margin-desktop h-16 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-2xl">restaurant</span>
+<span class="text-card-title font-card-title font-black text-primary">AI Restaurant Recommender</span>
+</div>
+<nav class="hidden md:flex items-center gap-lg">
+<a class="text-primary font-bold border-b-2 border-primary py-1 h-16 flex items-center" href="#">Discover</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low transition-colors px-md py-2 rounded-lg" href="#">My Favorites</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low transition-colors px-md py-2 rounded-lg" href="#">Community</a>
+</nav>
+<div class="flex items-center gap-sm">
+<span class="hidden md:inline-block text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Powered by AI</span>
+<button class="bg-primary text-on-primary px-md py-2 rounded-lg font-bold hover:opacity-90 transition-opacity active:scale-95 duration-150">
+                Log In
+            </button>
+</div>
+</header>
+<main class="pt-16 min-h-screen">
+<div class="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-[400px_1fr] min-h-[calc(100vh-64px)]">
+<!-- Left Column: Preference Form -->
+<aside class="bg-surface-container-lowest md:border-r border-outline-variant p-md lg:p-lg">
+<div class="sticky top-24">
+<div class="mb-xl">
+<h2 class="text-section-title font-section-title text-on-surface mb-xs">Your Preferences</h2>
+<p class="text-body-md text-on-surface-variant">Adjust these filters to refine your AI recommendations.</p>
+</div>
+<form class="space-y-lg">
+<div class="space-y-xs">
+<label class="text-label-sm font-bold text-on-surface-variant uppercase">Location</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">location_on</span>
+<input class="w-full pl-10 pr-md py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none bg-surface" type="text" value="Bangalore"/>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="text-label-sm font-bold text-on-surface-variant uppercase">Cuisine</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">restaurant_menu</span>
+<input class="w-full pl-10 pr-md py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none bg-surface" type="text" value="Italian"/>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="text-label-sm font-bold text-on-surface-variant uppercase">Budget</label>
+<div class="flex p-1 bg-surface-container rounded-lg">
+<button class="flex-1 py-2 rounded-md text-label-sm font-bold" type="button">₹</button>
+<button class="flex-1 py-2 rounded-md text-label-sm font-bold bg-primary text-on-primary shadow-sm" type="button">₹₹</button>
+<button class="flex-1 py-2 rounded-md text-label-sm font-bold" type="button">₹₹₹</button>
+</div>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between">
+<label class="text-label-sm font-bold text-on-surface-variant uppercase">Minimum Rating</label>
+<span class="text-primary font-bold">4.0+</span>
+</div>
+<input class="w-full h-2 bg-surface-container rounded-lg appearance-none cursor-pointer accent-primary" max="5" min="0" step="0.1" type="range" value="4.0"/>
+</div>
+<div class="space-y-xs">
+<label class="text-label-sm font-bold text-on-surface-variant uppercase">Extras</label>
+<div class="flex flex-wrap gap-xs">
+<span class="px-sm py-1.5 rounded-full bg-primary-container text-on-primary-container text-label-sm font-bold flex items-center gap-1">
+                                    family-friendly <span class="material-symbols-outlined text-[14px]">close</span>
+</span>
+<span class="px-sm py-1.5 rounded-full bg-primary-container text-on-primary-container text-label-sm font-bold flex items-center gap-1">
+                                    outdoor seating <span class="material-symbols-outlined text-[14px]">close</span>
+</span>
+<button class="px-sm py-1.5 rounded-full border border-outline-variant text-on-surface-variant text-label-sm hover:bg-surface-container-low transition-colors" type="button">+ Add</button>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-4 rounded-lg font-bold shadow-md hover:shadow-lg transition-all active:scale-[0.98]">
+                            Update Results
+                        </button>
+</form>
+</div>
+</aside>
+<!-- Right Column: Results -->
+<section class="p-md lg:p-margin-desktop bg-background">
+<!-- AI Summary Panel -->
+<div class="mb-xl p-lg rounded-xl bg-gradient-to-br from-primary-container/10 to-surface-container-highest border border-primary-container/20 relative overflow-hidden">
+<div class="flex items-start gap-md relative z-10">
+<div class="bg-primary p-xs rounded-lg animate-sparkle">
+<span class="material-symbols-outlined text-on-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div>
+<h3 class="text-card-title font-card-title text-on-surface mb-xs">AI Recommendation Summary</h3>
+<p class="text-body-lg text-on-surface-variant leading-relaxed">
+                                Based on your love of Italian food in Bangalore, I've curated these matches. You'll find options ranging from casual family-friendly cafes to upscale trattorias, all hitting your 4.0+ rating requirement with specific outdoor seating features.
+                            </p>
+</div>
+</div>
+</div>
+<!-- Recommendation Cards -->
+<div class="space-y-lg">
+<!-- Card #1 -->
+<div class="group relative bg-surface-container-lowest border-2 border-primary rounded-xl overflow-hidden rank-glow transition-all hover:translate-y-[-4px]">
+<div class="grid grid-cols-1 sm:grid-cols-[200px_1fr]">
+<div class="h-48 sm:h-auto overflow-hidden relative">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="A warm and inviting interior of an Italian restaurant in Bangalore with wood-fired ovens, brick walls, and rustic wooden tables. Soft, golden lighting illuminates the scene, creating a cozy and family-friendly atmosphere. Plates of fresh pasta and sourdough pizzas are visible on tables. The aesthetic is modern corporate with high-quality food photography focus." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCZbBfiyNU5_mgvMrclTMQtzEKlksqDT54-yXFuaxDlPxxta8ZTzUTeyGdMKELfnsencJA9lAvb0RkvEEINHuLjRF4IAI3eW1DH9FC1Sv0DMNKtgH87K13MTF2715o9XRJIHTlyv9-cQ1CmFkXQqEOlzcp_8NPHqmM1ByAVY7nLFiKmgPUebSSMDeEcwisUTDuNCi04DF_KoDLgDH7Iifht45M0oeqEWl8GFVBtVeiCKOiCCFdyzGIzmO7ObJCr4dHWmP6kpmvNFig')"></div>
+<div class="absolute top-3 left-3 bg-primary text-on-primary px-sm py-1 rounded-full text-label-sm font-bold shadow-lg">#1 Choice</div>
+</div>
+<div class="p-md lg:p-lg">
+<div class="flex justify-between items-start mb-xs">
+<div>
+<h4 class="text-section-title font-section-title text-on-surface">Truffles</h4>
+<p class="text-body-md text-on-surface-variant">Italian · Indiranagar</p>
+</div>
+<div class="flex items-center gap-1 px-sm py-1 bg-secondary rounded-lg text-on-secondary font-bold text-label-sm">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                                        4.5
+                                    </div>
+</div>
+<div class="flex items-center gap-xl mb-md text-label-sm font-bold text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">payments</span> ₹800 for two</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">groups</span> Family Friendly</span>
+</div>
+<div class="p-sm bg-surface-container rounded-lg border-l-4 border-primary">
+<p class="text-body-md italic text-on-surface">"Perfect for your medium budget and Italian craving — known for generous portions and a family-friendly vibe with outdoor seating."</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Card #2 -->
+<div class="group bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden transition-all hover:shadow-md hover:border-primary/40">
+<div class="grid grid-cols-1 sm:grid-cols-[200px_1fr]">
+<div class="h-48 sm:h-auto overflow-hidden">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="An elegant Italian fine dining setting on Lavelle Road, Bangalore. White tablecloths, crystal glassware, and sophisticated modern lighting. The outdoor terrace is visible with lush greenery and soft ambient lights. Professional architectural photography style with a premium, reliable atmosphere. Rich red accents in the decor." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBBOZakkrfnPVtOPurJn3snYFko5T3P_mVQpuGKu_yG9IywkqtkOWYflGxAYiOhlHpb8SRoOp-3qL9bslKtPhTVUI_WEsataPq2ZLRXoJF95OfJTTau8rw54wdapCt0rLd4eokxBWfey6rsMraEJnmJSVw442S-761tW6nB1OyuQTSQS7CrxU9iF0kvFjLtC7Vc2QAEP5yWGJYMTMIydLU3XZurVYI7NYWmOUKJMLDcOwWV1rH_4WKqD8Ktrc3_5PnjnLvXrjja2_U')"></div>
+</div>
+<div class="p-md lg:p-lg">
+<div class="flex justify-between items-start mb-xs">
+<div>
+<h4 class="text-card-title font-card-title text-on-surface">Toscano</h4>
+<p class="text-body-md text-on-surface-variant">Italian · Lavelle Road</p>
+</div>
+<div class="flex items-center gap-1 px-sm py-1 bg-secondary rounded-lg text-on-secondary font-bold text-label-sm">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                                        4.4
+                                    </div>
+</div>
+<div class="flex items-center gap-xl mb-md text-label-sm font-bold text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">payments</span> ₹1500 for two</span>
+</div>
+<div class="p-sm bg-surface-container/50 rounded-lg">
+<p class="text-body-md text-on-surface-variant italic">"Elegant Italian dining that matches your 4.0+ rating threshold; ideal for a slightly upscale evening."</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Card #3 -->
+<div class="group bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden transition-all hover:shadow-md hover:border-primary/40">
+<div class="grid grid-cols-1 sm:grid-cols-[200px_1fr]">
+<div class="h-48 sm:h-auto overflow-hidden">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="A vibrant, casual Italian pizzeria in Koramangala with an open kitchen and lively atmosphere. Bright white lighting and clean minimalist design elements. Families are enjoying pizzas and pasta together. The focus is on fresh ingredients and rapid service. High-quality food-centric imagery with energetic vibe." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuApJuavDpFXmW7H3h8gbsDzHjskuBDU99AfO08SxqqQ1-uz8VCCQFqD7MwACZBtjgXvAoDtEDjjrPk1ES7kyIOg5iSSfIRsGLMbOthvA6sIT9bz5BBPIbn6Ya5mH9QH2MMDKtsE_sSfXjpXxNhHzywIsar1XPoaU3fXohBJ65rHIJDRrvER8JGxNSOTPnB1UbX0MMIzwRUyuLoqVZzoD2NTJUd4C1FwJ0mSRK9dOiyy8cmapIz4IhCbTV8UGGNN1KjXOhvAgFtK-08')"></div>
+</div>
+<div class="p-md lg:p-lg">
+<div class="flex justify-between items-start mb-xs">
+<div>
+<h4 class="text-card-title font-card-title text-on-surface">Onesta</h4>
+<p class="text-body-md text-on-surface-variant">Italian · Koramangala</p>
+</div>
+<div class="flex items-center gap-1 px-sm py-1 bg-secondary rounded-lg text-on-secondary font-bold text-label-sm">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                                        4.3
+                                    </div>
+</div>
+<div class="flex items-center gap-xl mb-md text-label-sm font-bold text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">payments</span> ₹600 for two</span>
+</div>
+<div class="p-sm bg-surface-container/50 rounded-lg">
+<p class="text-body-md text-on-surface-variant italic">"Great value Italian with quick service — fits your medium budget and family-friendly preference."</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Card #4 -->
+<div class="group bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden transition-all hover:shadow-md hover:border-primary/40">
+<div class="grid grid-cols-1 sm:grid-cols-[200px_1fr]">
+<div class="h-48 sm:h-auto overflow-hidden">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Authentic Italian trattoria in Indiranagar featuring dark wood finishes and warm ambient lighting. The outdoor seating area is cozy with string lights. A chef is shown tossing fresh pasta. Reliable and appetizing culinary scene. The color palette is dominated by whites and warm browns with vibrant red pops." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCU7FcLWmcPc4FFYFPlKjIONeBv6eIHuh9l5k2KE9iKzUSDUTU3rE77MpqGmXRMZqoh1wViOpnygRLlYU4Mi74c6Js7Iaieg1adaWvTJRN21olO-sCq4zhsIfmBR-O4s07dnHVOe1l7xELtmw-yZirnD0Xgf9cF7QpAW6gCcL4HhWcWWLrCC9Cthkbd5L_nqr7-R7v33C-BTNmGh_5TZksZAUIq26HO1IBpQoRpLdju5F76KmESrDKrH5a25OPRbaS0TmrsprB1DvA')"></div>
+</div>
+<div class="p-md lg:p-lg">
+<div class="flex justify-between items-start mb-xs">
+<div>
+<h4 class="text-card-title font-card-title text-on-surface">Chianti</h4>
+<p class="text-body-md text-on-surface-variant">Italian · Indiranagar</p>
+</div>
+<div class="flex items-center gap-1 px-sm py-1 bg-secondary rounded-lg text-on-secondary font-bold text-label-sm">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                                        4.2
+                                    </div>
+</div>
+<div class="flex items-center gap-xl mb-md text-label-sm font-bold text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">payments</span> ₹1200 for two</span>
+</div>
+<div class="p-sm bg-surface-container/50 rounded-lg">
+<p class="text-body-md text-on-surface-variant italic">"Authentic flavors and great ambiance for your Italian craving."</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Card #5 -->
+<div class="group bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden transition-all hover:shadow-md hover:border-primary/40">
+<div class="grid grid-cols-1 sm:grid-cols-[200px_1fr]">
+<div class="h-48 sm:h-auto overflow-hidden">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Classic vegetarian Italian restaurant in Jayanagar with bright, airy interiors and plenty of natural light. Modern corporate clean aesthetic. Minimalist furniture and elegant table settings. Focus on fresh green vegetables and vibrant pasta dishes. Trustworthy and effortless vibe with a bright light-mode aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDdbpkZlQSc3oUehLP1Ca1FkUoONWrqG-3NdqqX5qx_zAV9xEwUeQcqXctmwFrxmiDjOqAO9-x1dLxmNmKL4cnJZo_bqSwwcugsPn7BdJ1bGndMSdKLTUme8zDIz_J6BkCl1Y2ho2A2MMl6PXvZJNeVYTJCsunyJTQ5CJdN9Bi2182AZMTUiEx_TL4f9mSCIxqhZ0Pvw0EqUA0SPNXgn0611rtoDIB9ET5gGa51KOMTaC6dC8M4x7S0SxCJqin5PSie1LgnexncrJI')"></div>
+</div>
+<div class="p-md lg:p-lg">
+<div class="flex justify-between items-start mb-xs">
+<div>
+<h4 class="text-card-title font-card-title text-on-surface">Little Italy</h4>
+<p class="text-body-md text-on-surface-variant">Italian · Jayanagar</p>
+</div>
+<div class="flex items-center gap-1 px-sm py-1 bg-secondary rounded-lg text-on-secondary font-bold text-label-sm">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                                        4.1
+                                    </div>
+</div>
+<div class="flex items-center gap-xl mb-md text-label-sm font-bold text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">payments</span> ₹1000 for two</span>
+</div>
+<div class="p-sm bg-surface-container/50 rounded-lg">
+<p class="text-body-md text-on-surface-variant italic">"A classic vegetarian choice that fits your rating and budget filters perfectly."</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-xl flex flex-col sm:flex-row items-center justify-between border-t border-outline-variant pt-lg gap-md">
+<p class="text-body-md text-on-surface-variant">Showing 5 of 18 candidates · AI-powered ranking</p>
+<div class="flex gap-sm">
+<button class="px-md py-2 border border-outline-variant rounded-lg text-label-sm font-bold hover:bg-surface-container-low transition-colors">Previous</button>
+<button class="px-md py-2 border border-outline-variant rounded-lg text-label-sm font-bold bg-surface-container-highest">1</button>
+<button class="px-md py-2 border border-outline-variant rounded-lg text-label-sm font-bold hover:bg-surface-container-low transition-colors">2</button>
+<button class="px-md py-2 border border-outline-variant rounded-lg text-label-sm font-bold hover:bg-surface-container-low transition-colors">3</button>
+<button class="px-md py-2 border border-outline-variant rounded-lg text-label-sm font-bold hover:bg-surface-container-low transition-colors">Next</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-xl px-md lg:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-md border-t border-outline-variant bg-surface-container-lowest">
+<div class="flex flex-col items-center md:items-start gap-xs">
+<span class="text-label-sm font-label-sm font-bold text-on-surface">AI Restaurant Recommender</span>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Data from Zomato dataset | Recommendations powered by AI</p>
+</div>
+<div class="flex gap-lg">
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Contact Support</a>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">© 2024 AI Food Discovery Inc.</p>
+</footer>
+<script>
+        // Simple micro-interactions
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.add('scale-95');
+                setTimeout(() => this.classList.remove('scale-95'), 150);
+            });
+        });
+
+        // Range slider value display (optional enhancement)
+        const range = document.querySelector('input[type="range"]');
+        if(range) {
+            range.addEventListener('input', (e) => {
+                const label = e.target.parentElement.querySelector('.text-primary');
+                if(label) label.textContent = parseFloat(e.target.value).toFixed(1) + '+';
+            });
+        }
+    </script>
+</body></html>

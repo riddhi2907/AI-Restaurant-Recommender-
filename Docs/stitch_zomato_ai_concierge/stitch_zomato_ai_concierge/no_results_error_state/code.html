@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#fffbff",
+                    "surface-variant": "#e5e2e1",
+                    "primary": "#b7122a",
+                    "inverse-primary": "#ffb3b1",
+                    "surface-container-highest": "#e5e2e1",
+                    "primary-container": "#db313f",
+                    "on-background": "#1b1b1b",
+                    "tertiary-fixed-dim": "#ffbb0c",
+                    "on-surface-variant": "#5b403f",
+                    "surface-dim": "#dcd9d9",
+                    "secondary-fixed": "#8dfa96",
+                    "surface-bright": "#fcf9f8",
+                    "secondary-container": "#8af793",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-low": "#f6f3f2",
+                    "outline": "#8f6f6e",
+                    "surface-tint": "#bb162c",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed-variant": "#00531b",
+                    "primary-fixed-dim": "#ffb3b1",
+                    "on-error": "#ffffff",
+                    "background": "#fcf9f8",
+                    "error": "#ba1a1a",
+                    "surface-container": "#f0eded",
+                    "on-tertiary-fixed-variant": "#5d4200",
+                    "secondary": "#006e26",
+                    "on-primary-fixed": "#410007",
+                    "inverse-surface": "#313030",
+                    "tertiary-container": "#976d00",
+                    "on-secondary-container": "#007328",
+                    "on-primary-fixed-variant": "#92001c",
+                    "inverse-on-surface": "#f3f0ef",
+                    "on-secondary-fixed": "#002106",
+                    "secondary-fixed-dim": "#71dd7c",
+                    "on-tertiary-fixed": "#271900",
+                    "on-surface": "#1b1b1b",
+                    "outline-variant": "#e4bebc",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#785600",
+                    "tertiary-fixed": "#ffdea6",
+                    "surface": "#fcf9f8",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-container": "#fffbff",
+                    "surface-container-high": "#eae7e7",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#ffdad8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "margin-mobile": "16px",
+                    "lg": "24px",
+                    "gutter": "16px",
+                    "xl": "32px",
+                    "base": "4px",
+                    "sm": "12px",
+                    "margin-desktop": "48px",
+                    "xs": "8px"
+            },
+            "fontFamily": {
+                    "section-title": ["Inter"],
+                    "page-title-mobile": ["Inter"],
+                    "card-title": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "page-title": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "section-title": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "page-title-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "card-title": ["18px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "1.5", "fontWeight": "500"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                    "page-title": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 16px;
+        }
+        .shimmer {
+            background: linear-gradient(90deg, #f0eded 25%, #fcf9f8 50%, #f0eded 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-md lg:px-margin-desktop h-16 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline">
+<div class="flex items-center gap-xs">
+<span class="text-card-title font-card-title font-black text-primary dark:text-primary-container">AI Restaurant Recommender</span>
+</div>
+<nav class="hidden md:flex items-center gap-lg">
+<a class="text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-inverse-surface transition-colors px-xs py-1 rounded" href="#">Explore</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-inverse-surface transition-colors px-xs py-1 rounded" href="#">Near Me</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-inverse-surface transition-colors px-xs py-1 rounded" href="#">Favorites</a>
+</nav>
+<div class="flex items-center gap-md">
+<span class="hidden md:block text-label-sm font-label-sm text-primary dark:text-inverse-primary uppercase tracking-widest">Powered by AI</span>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-all active:scale-95">search</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-all active:scale-95">account_circle</button>
+</div>
+</header>
+<main class="pt-24 pb-xl px-md lg:px-margin-desktop min-h-[calc(100vh-160px)] flex flex-col gap-xl max-w-[1200px] mx-auto">
+<!-- Error State Section -->
+<section class="w-full" id="error-section">
+<div class="bg-error-container border-l-4 border-error p-lg rounded-lg flex flex-col md:flex-row items-center justify-between gap-md shadow-sm">
+<div class="flex items-center gap-md">
+<div class="bg-error text-on-error w-12 h-12 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">error</span>
+</div>
+<div>
+<h2 class="text-card-title font-card-title text-on-error-container">Something went wrong</h2>
+<p class="text-body-md font-body-md text-on-error-container opacity-90">We encountered a temporary technical glitch while fetching the latest recommendations. Please try again in a moment.</p>
+</div>
+</div>
+<button class="shrink-0 bg-error text-on-error px-xl py-md rounded-lg font-body-lg hover:brightness-110 transition-all active:scale-95 shadow-md flex items-center gap-xs" onclick="window.location.reload()">
+<span class="material-symbols-outlined">refresh</span>
+                    Retry
+                </button>
+</div>
+</section>
+<!-- Empty State Section (Bento Inspired) -->
+<section class="w-full py-xl" id="empty-section">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-lg items-stretch">
+<!-- Main Empty State Illustration & Message -->
+<div class="md:col-span-8 bg-surface-container-lowest border border-outline-variant rounded-xl p-xl flex flex-col items-center justify-center text-center gap-lg shadow-sm">
+<div class="relative w-48 h-48 bg-surface-container-low rounded-full flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 opacity-20">
+<div class="shimmer w-full h-full"></div>
+</div>
+<span class="material-symbols-outlined text-[80px] text-outline-variant" style="font-variation-settings: 'FILL' 1">restaurant_menu</span>
+<div class="absolute bottom-4 right-4 bg-primary text-white p-2 rounded-full shadow-lg scale-110">
+<span class="material-symbols-outlined">search_off</span>
+</div>
+</div>
+<div class="max-w-md">
+<h1 class="text-page-title font-page-title text-on-surface mb-xs">No matches found</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant">We couldn't find any restaurants matching your current filters. AI suggests trying a different cuisine or broadening your price range to discover hidden gems.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-md">
+<button class="bg-primary text-on-primary px-xl py-md rounded-lg font-body-lg hover:shadow-lg transition-all active:scale-95">
+                            Reset All Filters
+                        </button>
+<button class="border border-primary text-primary px-xl py-md rounded-lg font-body-lg hover:bg-primary-container hover:text-on-primary-container transition-all active:scale-95">
+                            Browse Popular Nearby
+                        </button>
+</div>
+</div>
+<!-- Suggestions Sidebar / Bento Cell -->
+<div class="md:col-span-4 flex flex-col gap-lg">
+<div class="bg-surface-container-low p-lg rounded-xl flex-1 border border-outline-variant">
+<h3 class="text-card-title font-card-title mb-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">lightbulb</span>
+                            AI Suggestions
+                        </h3>
+<ul class="space-y-md">
+<li class="flex items-start gap-xs">
+<span class="material-symbols-outlined text-secondary mt-1">check_circle</span>
+<span class="text-body-md">Switch from <strong class="text-primary">Fine Dining</strong> to <strong class="text-primary">Casual</strong> for more local options.</span>
+</li>
+<li class="flex items-start gap-xs">
+<span class="material-symbols-outlined text-secondary mt-1">check_circle</span>
+<span class="text-body-md">Try searching for <strong class="text-primary">Indo-Chinese</strong> or <strong class="text-primary">Street Food</strong>.</span>
+</li>
+<li class="flex items-start gap-xs">
+<span class="material-symbols-outlined text-secondary mt-1">check_circle</span>
+<span class="text-body-md">Increase your radius to 5km to include high-rated neighborhood spots.</span>
+</li>
+</ul>
+</div>
+<div class="relative overflow-hidden rounded-xl h-48 group shadow-sm">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A cinematic, shallow depth-of-field shot of a bustling, dimly lit modern restaurant kitchen. Golden light reflects off copper pans and white ceramic plates as steam rises from a fresh dish. The atmosphere is vibrant, professional, and appetizing, emphasizing the quality of a premium dining experience." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDLIR5opBlfD32A7JqTFqRtcASESmf1m3y92_w55nYoZDC_y69aTOJC5Yv5m1m5g4E8JkspQyhAJEAikVPsOyoTz2yOKYzMaX9xyoc1OKB8Y0UTYI1xCT-xt5p2HTc6nf6eBFrVUjxrienZnHAOgFLD3kSjcaus9FN7aiuLeBdEqL8qcUO3OtmyPG_sakIRe_tEbm9LfPhY2B4tcHbjBYz1-INaZG9Kyw7F8gIVNIhG7rRpfSD0ikhExp_ezWcXDP-w0KIhrD-h36U')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4">
+<p class="text-white text-label-sm font-label-sm mb-1 uppercase tracking-wider">Top Rated This Week</p>
+<p class="text-white font-card-title">Explore Trending Restaurants</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contextual Help / Tips Section -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<div class="p-lg bg-surface border border-outline-variant rounded-xl hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-primary mb-md">location_on</span>
+<h4 class="text-card-title font-card-title mb-xs">Check Location</h4>
+<p class="text-body-md text-on-surface-variant">Ensure your GPS is enabled or try typing a specific neighborhood name manually.</p>
+</div>
+<div class="p-lg bg-surface border border-outline-variant rounded-xl hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-primary mb-md">payments</span>
+<h4 class="text-card-title font-card-title mb-xs">Relax Budget</h4>
+<p class="text-body-md text-on-surface-variant">Adjusting your price filter by just one level can increase results by up to 40%.</p>
+</div>
+<div class="p-lg bg-surface border border-outline-variant rounded-xl hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-primary mb-md">restaurant</span>
+<h4 class="text-card-title font-card-title mb-xs">Broaden Cuisine</h4>
+<p class="text-body-md text-on-surface-variant">Looking for "Italian"? Try "European" to see more diverse bistro options nearby.</p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-xl px-md lg:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-md bg-surface-container-lowest dark:bg-surface-dim border-t border-outline-variant dark:border-outline">
+<div class="flex flex-col gap-xs items-center md:items-start">
+<span class="text-label-sm font-label-sm font-bold text-on-surface">AI Restaurant Recommender</span>
+<p class="text-body-md font-body-md text-on-surface-variant max-w-xs text-center md:text-left">Data from Zomato dataset | Recommendations powered by AI</p>
+</div>
+<nav class="flex flex-wrap justify-center gap-md">
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Privacy Policy</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Terms of Service</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Contact Support</a>
+</nav>
+<div class="flex gap-md">
+<a class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" href="#">facebook</a>
+<a class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" href="#">share_location</a>
+<a class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" href="#">mail</a>
+</div>
+</footer>
+<!-- Mobile Bottom Navigation (Platform & Layout Anchor) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface border-t border-outline-variant flex justify-around items-center py-xs z-50">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">explore</span>
+<span class="text-[10px] font-bold">Explore</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">near_me</span>
+<span class="text-[10px]">Near Me</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">favorite</span>
+<span class="text-[10px]">Saved</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px]">Profile</span>
+</button>
+</nav>
+<script>
+        // Micro-interactions for buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                btn.style.transform = 'scale(0.95)';
+            });
+            btn.addEventListener('mouseup', () => {
+                btn.style.transform = 'scale(1)';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'scale(1)';
+            });
+        });
+
+        // Simulating a minor parallax effect for the error card
+        window.addEventListener('mousemove', (e) => {
+            const errorCard = document.getElementById('error-section');
+            if (errorCard) {
+                const moveX = (e.clientX - window.innerWidth / 2) * 0.005;
+                const moveY = (e.clientY - window.innerHeight / 2) * 0.005;
+                errorCard.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            }
+        });
+    </script>
+</body></html>

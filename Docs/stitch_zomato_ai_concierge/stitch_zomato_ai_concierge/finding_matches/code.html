@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#fffbff",
+                        "surface-variant": "#e5e2e1",
+                        "primary": "#b7122a",
+                        "inverse-primary": "#ffb3b1",
+                        "surface-container-highest": "#e5e2e1",
+                        "primary-container": "#db313f",
+                        "on-background": "#1b1b1b",
+                        "tertiary-fixed-dim": "#ffbb0c",
+                        "on-surface-variant": "#5b403f",
+                        "surface-dim": "#dcd9d9",
+                        "secondary-fixed": "#8dfa96",
+                        "surface-bright": "#fcf9f8",
+                        "secondary-container": "#8af793",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f6f3f2",
+                        "outline": "#8f6f6e",
+                        "surface-tint": "#bb162c",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#00531b",
+                        "primary-fixed-dim": "#ffb3b1",
+                        "on-error": "#ffffff",
+                        "background": "#fcf9f8",
+                        "error": "#ba1a1a",
+                        "surface-container": "#f0eded",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "secondary": "#006e26",
+                        "on-primary-fixed": "#410007",
+                        "inverse-surface": "#313030",
+                        "tertiary-container": "#976d00",
+                        "on-secondary-container": "#007328",
+                        "on-primary-fixed-variant": "#92001c",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-secondary-fixed": "#002106",
+                        "secondary-fixed-dim": "#71dd7c",
+                        "on-tertiary-fixed": "#271900",
+                        "on-surface": "#1b1b1b",
+                        "outline-variant": "#e4bebc",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#785600",
+                        "tertiary-fixed": "#ffdea6",
+                        "surface": "#fcf9f8",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#fffbff",
+                        "surface-container-high": "#eae7e7",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#ffdad8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "margin-mobile": "16px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "xl": "32px",
+                        "base": "4px",
+                        "sm": "12px",
+                        "margin-desktop": "48px",
+                        "xs": "8px"
+                    },
+                    "fontFamily": {
+                        "section-title": ["Inter"],
+                        "page-title-mobile": ["Inter"],
+                        "card-title": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "page-title": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "section-title": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "page-title-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "card-title": ["18px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "1.5", "fontWeight": "500"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                        "page-title": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .shimmer {
+            background: linear-gradient(90deg, #f0eded 25%, #fcf9f8 50%, #f0eded 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        .loading-spinner {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 2px solid #ffffff;
+            width: 18px;
+            height: 18px;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        body {
+            background-color: #fcf9f8;
+            color: #1b1b1b;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-md text-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-md lg:px-margin-desktop h-16 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline">
+<div class="flex items-center gap-xs">
+<span class="text-card-title font-card-title font-black text-primary dark:text-primary-container">AI Restaurant Recommender</span>
+</div>
+<div class="hidden md:flex items-center gap-lg">
+<a class="text-primary dark:text-inverse-primary font-bold border-b-2 border-primary py-1" href="#">Explore</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-inverse-surface transition-colors px-2 py-1 rounded" href="#">History</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-inverse-surface transition-colors px-2 py-1 rounded" href="#">Profile</a>
+</div>
+<div class="flex items-center">
+<span class="text-label-sm font-label-sm text-primary dark:text-inverse-primary uppercase tracking-wider font-bold">Powered by AI</span>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow pt-16 flex flex-col md:flex-row w-full max-w-[1440px] mx-auto bg-background">
+<!-- Left Column: Preference Form (Disabled State) -->
+<aside class="w-full md:w-[40%] p-md lg:p-xl relative border-r border-outline-variant/30">
+<div class="flex flex-col gap-lg opacity-60 pointer-events-none grayscale-[0.2]">
+<div>
+<h2 class="text-section-title font-section-title text-on-surface mb-xs">Refine Search</h2>
+<p class="text-body-md text-on-surface-variant">Adjust your preferences for better matching.</p>
+</div>
+<!-- Form Fields -->
+<div class="flex flex-col gap-md">
+<div class="flex flex-col gap-xs">
+<label class="text-label-sm font-label-sm font-bold text-on-surface-variant">CUISINE TYPE</label>
+<div class="w-full h-11 bg-surface-container border border-outline-variant rounded-lg flex items-center px-md text-surface-variant">
+                            Italian, Japanese, Continental
+                        </div>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="text-label-sm font-label-sm font-bold text-on-surface-variant">BUDGET RANGE</label>
+<div class="flex bg-surface-container rounded-lg p-1">
+<div class="flex-1 text-center py-2 text-label-sm font-bold rounded-md">₹</div>
+<div class="flex-1 text-center py-2 text-label-sm font-bold rounded-md bg-primary text-white shadow-sm">₹₹</div>
+<div class="flex-1 text-center py-2 text-label-sm font-bold rounded-md">₹₹₹</div>
+<div class="flex-1 text-center py-2 text-label-sm font-bold rounded-md">₹₹₹₹</div>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="text-label-sm font-label-sm font-bold text-on-surface-variant">DISTANCE (KM)</label>
+<div class="relative h-6 flex items-center">
+<div class="w-full h-1 bg-outline-variant rounded-full"></div>
+<div class="absolute left-1/2 w-5 h-5 bg-primary border-2 border-white rounded-full shadow-sm"></div>
+</div>
+<div class="flex justify-between text-label-sm text-on-surface-variant">
+<span>1km</span>
+<span>10km</span>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="text-label-sm font-label-sm font-bold text-on-surface-variant">DIETARY REQUIREMENTS</label>
+<div class="flex flex-wrap gap-xs">
+<span class="px-3 py-1.5 rounded-full border border-outline-variant text-label-sm bg-surface-container">Vegetarian</span>
+<span class="px-3 py-1.5 rounded-full border border-outline-variant text-label-sm bg-surface-container">Vegan</span>
+<span class="px-3 py-1.5 rounded-full border border-outline-variant text-label-sm bg-surface-container">Gluten Free</span>
+</div>
+</div>
+</div>
+<button class="w-full h-12 bg-primary text-on-primary font-bold rounded-lg flex items-center justify-center gap-md shadow-lg">
+<div class="loading-spinner"></div>
+<span>Finding Matches...</span>
+</button>
+</div>
+<!-- Subtle Overlay for emphasis -->
+<div class="absolute inset-0 bg-white/20 z-10 pointer-events-none"></div>
+</aside>
+<!-- Right Column: Results (Skeleton State) -->
+<section class="w-full md:w-[60%] p-md lg:p-xl bg-surface-container-low">
+<div class="flex flex-col gap-lg">
+<!-- Status Header -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary animate-pulse" style="font-variation-settings: 'FILL' 1;">temp_preferences_custom</span>
+<h3 class="text-card-title font-card-title text-on-surface">AI is ranking your matches…</h3>
+</div>
+<div class="h-4 w-32 shimmer rounded"></div>
+</div>
+<!-- Skeleton Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-md">
+<!-- Card 1 -->
+<div class="bg-surface rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
+<div class="h-48 w-full shimmer"></div>
+<div class="p-md flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<div class="h-6 w-3/4 shimmer rounded"></div>
+<div class="h-6 w-8 shimmer rounded-lg"></div>
+</div>
+<div class="h-4 w-1/2 shimmer rounded"></div>
+<div class="flex gap-xs mt-xs">
+<div class="h-6 w-16 shimmer rounded-full"></div>
+<div class="h-6 w-16 shimmer rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
+<div class="h-48 w-full shimmer"></div>
+<div class="p-md flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<div class="h-6 w-3/4 shimmer rounded"></div>
+<div class="h-6 w-8 shimmer rounded-lg"></div>
+</div>
+<div class="h-4 w-1/2 shimmer rounded"></div>
+<div class="flex gap-xs mt-xs">
+<div class="h-6 w-16 shimmer rounded-full"></div>
+<div class="h-6 w-16 shimmer rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
+<div class="h-48 w-full shimmer"></div>
+<div class="p-md flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<div class="h-6 w-2/3 shimmer rounded"></div>
+<div class="h-6 w-8 shimmer rounded-lg"></div>
+</div>
+<div class="h-4 w-1/3 shimmer rounded"></div>
+<div class="flex gap-xs mt-xs">
+<div class="h-6 w-16 shimmer rounded-full"></div>
+<div class="h-6 w-16 shimmer rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
+<div class="h-48 w-full shimmer"></div>
+<div class="p-md flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<div class="h-6 w-3/4 shimmer rounded"></div>
+<div class="h-6 w-8 shimmer rounded-lg"></div>
+</div>
+<div class="h-4 w-1/2 shimmer rounded"></div>
+<div class="flex gap-xs mt-xs">
+<div class="h-6 w-16 shimmer rounded-full"></div>
+<div class="h-6 w-16 shimmer rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Card 5 (Partial overlap/hidden on small screens) -->
+<div class="bg-surface rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.08)] hidden lg:block">
+<div class="h-48 w-full shimmer"></div>
+<div class="p-md flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<div class="h-6 w-1/2 shimmer rounded"></div>
+<div class="h-6 w-8 shimmer rounded-lg"></div>
+</div>
+<div class="h-4 w-1/4 shimmer rounded"></div>
+</div>
+</div>
+</div>
+<!-- Atmospheric Loading Tip -->
+<div class="mt-lg p-lg bg-primary-container/10 border border-primary-container/20 rounded-xl flex items-center gap-md">
+<span class="material-symbols-outlined text-primary-container text-3xl">lightbulb</span>
+<div>
+<p class="text-label-sm font-bold text-primary-container uppercase mb-1">PRO TIP</p>
+<p class="text-body-md text-on-surface-variant italic">"We're analyzing real-time traffic and reviews to find the freshest spots for you."</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-xl px-md lg:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-md bg-surface-container-lowest dark:bg-surface-dim border-t border-outline-variant dark:border-outline">
+<div class="flex flex-col items-center md:items-start gap-xs">
+<span class="text-label-sm font-label-sm font-bold text-on-surface">AI Restaurant Recommender</span>
+<p class="text-body-md font-body-md text-on-surface-variant">Data from Zomato dataset | Recommendations powered by AI</p>
+</div>
+<div class="flex gap-md">
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Contact Support</a>
+</div>
+<div class="text-label-sm font-label-sm text-on-surface-variant">
+            © 2024 AI Food Discovery Inc.
+        </div>
+</footer>
+<script>
+        // Simple loading text cycle to add realism
+        const statusText = document.querySelector('h3.text-card-title');
+        const phrases = [
+            "AI is ranking your matches…",
+            "Checking real-time availability…",
+            "Cross-referencing reviews…",
+            "Calculating distance from you…",
+            "Finding the best value options…"
+        ];
+        let i = 0;
+        setInterval(() => {
+            i = (i + 1) % phrases.length;
+            statusText.style.opacity = 0;
+            setTimeout(() => {
+                statusText.innerText = phrases[i];
+                statusText.style.opacity = 1;
+            }, 300);
+        }, 3000);
+    </script>
+</body></html>
