@@ -75,7 +75,7 @@ def _env_csv(key: str, default: tuple[str, ...]) -> tuple[str, ...]:
     raw = os.getenv(key)
     if not raw:
         return default
-    values = tuple(part.strip() for part in raw.split(",") if part.strip())
+    values = tuple(part.strip().rstrip("/") for part in raw.split(",") if part.strip())
     return values or default
 
 
