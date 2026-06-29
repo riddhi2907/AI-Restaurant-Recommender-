@@ -42,7 +42,7 @@ def validate_schema(df: pd.DataFrame) -> None:
         )
 
 
-def load_raw_dataframe(*, max_retries: int = 1, retry_delay_seconds: float = 2.0) -> pd.DataFrame:
+def load_raw_dataframe(*, max_retries: int = 3, retry_delay_seconds: float = 2.0) -> pd.DataFrame:
     """Load raw dataset from Hugging Face with retry on failure."""
     last_error: Exception | None = None
 

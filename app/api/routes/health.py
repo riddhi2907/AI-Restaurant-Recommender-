@@ -20,13 +20,25 @@ def ready(request: Request) -> ReadyResponse:
     store = getattr(request.app.state, "store", None)
     warnings: list[str] = []
 
+    if getattr(request.app.state, "dataset_loading", False):
+        return ReadyResponse(
+            status="loading",
+            dataset_loaded=False,
+            restaurant_count=0,
+            groq_configured=settings.groq_configured,
+            warnings=["Restaurant dataset is still loading."],
+        )
+
     if store is None:
+        error = getattr(request.app.state, "dataset_load_error", None)
         return ReadyResponse(
             status="not_ready",
             dataset_loaded=False,
             restaurant_count=0,
             groq_configured=settings.groq_configured,
-            warnings=["Restaurant dataset failed to load during startup."],
+            warnings=[
+                error or "Restaurant dataset failed to load during startup.",
+            ],
         )
 
     if not settings.groq_configured:
