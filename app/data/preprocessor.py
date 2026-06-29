@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import gc
 import hashlib
+import logging
 import re
 from typing import TYPE_CHECKING
 
@@ -12,6 +14,8 @@ from app.models.restaurant import BudgetTier, Restaurant
 
 if TYPE_CHECKING:
     from app.config import Settings
+
+logger = logging.getLogger(__name__)
 
 COST_COLUMN = "approx_cost(for two people)"
 RATE_COLUMN = "rate"
@@ -235,16 +239,30 @@ def preprocess_row(row: pd.Series, settings: Settings) -> Restaurant | None:
 def preprocess_dataframe(df: pd.DataFrame, settings: Settings) -> list[Restaurant]:
     restaurants: list[Restaurant] = []
     dropped = 0
+    chunk_size = 5_000
+    total_rows = len(df)
 
-    for _, row in df.iterrows():
-        restaurant = preprocess_row(row, settings)
-        if restaurant is None:
-            dropped += 1
-            continue
-        restaurants.append(restaurant)
+    for start in range(0, total_rows, chunk_size):
+        end = min(start + chunk_size, total_rows)
+        chunk = df.iloc[start:end]
+        for _, row in chunk.iterrows():
+            restaurant = preprocess_row(row, settings)
+            if restaurant is None:
+                dropped += 1
+                continue
+            restaurants.append(restaurant)
+        del chunk
+        gc.collect()
+        if end == total_rows or end % (chunk_size * 2) == 0 or end == chunk_size:
+            logger.info(
+                "[dataset] preprocess — %d/%d rows processed (%d kept, %d dropped)",
+                end,
+                total_rows,
+                len(restaurants),
+                dropped,
+            )
 
     if dropped:
-        logger = __import__("logging").getLogger(__name__)
-        logger.info("Dropped %d invalid rows during preprocessing", dropped)
+        logger.info("[dataset] preprocess — dropped %d invalid rows", dropped)
 
     return restaurants

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import gc
 import logging
 from pathlib import Path
 
@@ -10,6 +11,7 @@ import pandas as pd
 from app.config import Settings, settings as default_settings
 from app.data.loader import DatasetLoadError, load_raw_dataframe
 from app.data.preprocessor import is_city_name, preprocess_dataframe
+from app.logging_config import current_memory_mb, format_memory_mb, log_phase
 from app.models.restaurant import Restaurant
 
 logger = logging.getLogger(__name__)
@@ -71,24 +73,50 @@ class RestaurantStore:
         settings = settings or default_settings
         cache_path = settings.dataset_cache_path
 
+        logger.info(
+            "[dataset] cache_path=%s exists=%s size_bytes=%s",
+            cache_path,
+            cache_path.exists(),
+            cache_path.stat().st_size if cache_path.exists() else 0,
+        )
+
         if use_cache and cache_path.exists():
             try:
-                restaurants = _load_from_cache(cache_path)
-                logger.info("Loaded %d restaurants from cache: %s", len(restaurants), cache_path)
+                with log_phase(logger, "dataset.cache_load"):
+                    restaurants = _load_from_cache(cache_path)
+                logger.info("[dataset] cache_load — %d restaurants ready", len(restaurants))
                 return cls(restaurants)
             except Exception as exc:
-                logger.warning("Failed to load cache %s: %s. Re-fetching dataset.", cache_path, exc)
+                logger.warning(
+                    "[dataset] cache_load — invalid cache at %s (%s); falling back to Hugging Face",
+                    cache_path,
+                    exc,
+                    exc_info=True,
+                )
 
-        df = load_raw_dataframe()
-        restaurants = preprocess_dataframe(df, settings)
+        with log_phase(logger, "dataset.huggingface_download"):
+            df = load_raw_dataframe()
+
+        try:
+            with log_phase(logger, "dataset.preprocess"):
+                restaurants = preprocess_dataframe(df, settings)
+        finally:
+            del df
+            gc.collect()
 
         if not restaurants:
             raise DatasetLoadError("No valid restaurants after preprocessing")
 
         if use_cache:
-            _save_to_cache(restaurants, cache_path)
+            with log_phase(logger, "dataset.cache_save"):
+                _save_to_cache(restaurants, cache_path)
+            gc.collect()
 
-        logger.info("Loaded and preprocessed %d restaurants", len(restaurants))
+        logger.info(
+            "[dataset] load_complete — %d restaurants (rss=%s MB)",
+            len(restaurants),
+            format_memory_mb(current_memory_mb()),
+        )
         return cls(restaurants)
 
 
@@ -143,7 +171,12 @@ def _save_to_cache(restaurants: list[Restaurant], cache_path: Path) -> None:
     cache_path.parent.mkdir(parents=True, exist_ok=True)
     df = _restaurants_to_dataframe(restaurants)
     df.to_parquet(cache_path, index=False)
-    logger.info("Saved restaurant cache to %s", cache_path)
+    logger.info(
+        "[dataset] cache_save — wrote %d rows to %s (%d bytes)",
+        len(restaurants),
+        cache_path,
+        cache_path.stat().st_size,
+    )
 
 
 def _load_from_cache(cache_path: Path) -> list[Restaurant]:

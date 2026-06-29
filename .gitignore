@@ -14,6 +14,7 @@ build/
 
 data/cache/*
 !data/cache/.gitkeep
+!data/cache/restaurants.parquet
 
 .streamlit/secrets.toml
 
